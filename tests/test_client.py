@@ -9,7 +9,6 @@ from whisper_live.client import Client, TranscriptionClient, TranscriptionTeeCli
 from whisper_live.utils import resample
 from pathlib import Path
 
-
 class BaseTestCase(unittest.TestCase):
     @patch('whisper_live.client.websocket.WebSocketApp')
     @patch('whisper_live.client.pyaudio.PyAudio')
@@ -39,7 +38,6 @@ class TestClientWebSocketCommunication(BaseTestCase):
         expected_url = 'ws://localhost:9090'
         self.mock_websocket.assert_called()
         self.assertEqual(self.mock_websocket.call_args[0][0], expected_url)
-
 
 class TestClientCallbacks(BaseTestCase):
     def test_on_open(self):
@@ -93,7 +91,6 @@ class TestClientCallbacks(BaseTestCase):
         self.assertTrue(self.client.server_error)
         self.assertEqual(self.client.error_message, error_message)
 
-
 class TestAudioResampling(unittest.TestCase):
     def test_resample_audio(self):
         original_audio = "assets/jfk.flac"
@@ -104,7 +101,6 @@ class TestAudioResampling(unittest.TestCase):
         self.assertEqual(sr, expected_sr)
 
         os.remove(resampled_audio)
-
 
 class TestSendingAudioPacket(BaseTestCase):
     def test_send_packet(self):
